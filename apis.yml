@@ -1,8 +1,26 @@
 aid: saleo
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/saleo.png
 name: Saleo
-description: 'Saleo is a company surfaced as a portfolio company of emergence-capital and added to the
-  API Evangelist network as a stub for enrichment. Sector: sales-tech. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: 'Saleo is an AI-powered demo experience platform for go-to-market teams,
+  enabling sales and pre-sales engineers to run high-stakes live demos inside their
+  native product, build self-serve interactive product tours, and deliver autonomous
+  AI-driven demos around the clock. Its products include Live (real demos backed by
+  AI-generated demo data), Demo Agent (autonomous AI discovery agents), and Capture
+  (interactive product tours). Saleo serves enterprise customers including SAP, Salesforce,
+  6sense, Seismic, and SailPoint, and is backed by Emergence Capital. No public developer
+  API surface was found during enrichment; this profile tracks the company for the
+  API Evangelist network.'
 url: https://raw.githubusercontent.com/api-evangelist/saleo/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,10 +30,15 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Sales Tech
+- Demo Automation
+- Sales Enablement
+- Presales
+- Go-To-Market
+- AI Agents
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -23,5 +46,12 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/saleo-domain-security.yml
 - type: Website
   url: https://www.saleo.io
+x-enrichment:
+  date: '2026-07-21'
+  status: minimal
+  artifacts_added: 1
+  pass: local-v1
