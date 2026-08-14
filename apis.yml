@@ -1,36 +1,41 @@
 aid: saleo
 accessModel:
   pricing: unknown
-  onboarding: unknown
+  onboarding: sales
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  label: Sales-Gated
+  confidence: medium
+  source:
+  - https://saleo.io/pricing/
+  - https://saleo.io/request-a-demo/
+  generated: '2026-08-13'
+  method: searched
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/saleo.png
 name: Saleo
-description: 'Saleo is an AI-powered demo experience platform for go-to-market teams,
+description: 'Saleo is an AI-native demo experience platform for go-to-market teams,
   enabling sales and pre-sales engineers to run high-stakes live demos inside their
   native product, build self-serve interactive product tours, and deliver autonomous
   AI-driven demos around the clock. Its products include Live (real demos backed by
-  AI-generated demo data), Demo Agent (autonomous AI discovery agents), and Capture
-  (interactive product tours). Saleo serves enterprise customers including SAP, Salesforce,
-  6sense, Seismic, and SailPoint, and is backed by Emergence Capital. No public developer
-  API surface was found during enrichment; this profile tracks the company for the
-  API Evangelist network.'
+  AI-generated demo data), AI Demo Agent (autonomous multi-lingual discovery and demo
+  agents), Data Creation Agent, Capture (interactive product tours and embeddable sandboxes),
+  and a Partner Portal for resellers. Saleo serves enterprise customers including SAP,
+  Salesforce, 6sense, Seismic, and SailPoint, and is backed by Emergence Capital. Its
+  only standards-based, externally documented API is a SCIM 2.0 user and group provisioning
+  endpoint used by the Saleo app in the Okta Integration Network; the product API that
+  backs the Saleo Portal, Chrome extension and tour viewer is customer-authenticated
+  and undocumented.'
 url: https://raw.githubusercontent.com/api-evangelist/saleo/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - emergence-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profile
+x-tier-reason: scim-api-discovered
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-13'
 tags:
 - Company
 - Sales Tech
@@ -39,7 +44,38 @@ tags:
 - Presales
 - Go-To-Market
 - AI Agents
-apis: []
+- SCIM
+- Identity Provisioning
+- Single Sign-On
+- Interactive Demos
+- Product Tours
+apis:
+- name: Saleo SCIM 2.0 Provisioning API
+  description: 'SCIM 2.0 (RFC 7643 / RFC 7644) user and group provisioning endpoint
+    for the Saleo platform. Documented for customers through the Saleo Okta Integration
+    Network application, which supports Create Users, Update User Attributes, Deactivate
+    Users and Group Push (an Okta Group becomes a Saleo Team). Authentication uses a
+    long-lived bearer API token minted from the Saleo Portal; tokens never expire but
+    can be revoked. All SCIM resource endpoints — including ServiceProviderConfig,
+    ResourceTypes and Schemas, which RFC 7644 allows to be served anonymously — return
+    HTTP 401 with a conformant SCIM error envelope when unauthenticated, so the
+    schema is not publicly readable and no OpenAPI is published.'
+  humanURL: https://help.saleo.io/articles/5029724323-how-to-configure-scim-within-saleo-s-okta-integration-network-app
+  baseURL: https://api.platform.saleo.io/scim/v2
+  tags:
+  - SCIM
+  - Identity Provisioning
+  - User Management
+  - Okta
+  properties:
+  - type: Authentication
+    url: authentication/saleo-authentication.yml
+  - type: Conformance
+    url: conformance/saleo-conformance.yml
+  - type: ErrorCatalog
+    url: errors/saleo-problem-types.yml
+  - type: Conventions
+    url: conventions/saleo-conventions.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -50,8 +86,56 @@ common:
   url: security/saleo-domain-security.yml
 - type: Website
   url: https://www.saleo.io
+- type: Portal
+  url: https://app.platform.saleo.io/
+- type: Documentation
+  url: https://help.saleo.io/
+- type: Support
+  url: https://saleo.io/contact-us/
+- type: HelpCenter
+  url: https://help.saleo.io/
+- type: Blog
+  url: https://saleo.io/blog/
+- type: Pricing
+  url: https://saleo.io/pricing/
+- type: Login
+  url: https://app.platform.saleo.io/
+- type: TermsOfService
+  url: https://saleo.io/about-us/terms-of-service/
+- type: PrivacyPolicy
+  url: https://saleo.io/about-us/privacy-policy/
+- type: AcceptableUsePolicy
+  url: https://saleo.io/about-us/acceptable-use-policy/
+- type: Security
+  url: https://saleo.io/platform/security/
+- type: Compliance
+  url: https://saleo.io/platform/security/
+- type: TrustCenter
+  url: security/saleo-trust-center.yml
+- type: StatusPage
+  url: https://status.saleo.io/
+- type: Lifecycle
+  url: lifecycle/saleo-lifecycle.yml
+- type: LLMsTxt
+  url: llms/saleo-llms.txt
+- type: Conformance
+  url: conformance/saleo-conformance.yml
+- type: Authentication
+  url: authentication/saleo-authentication.yml
+- type: Conventions
+  url: conventions/saleo-conventions.yml
+- type: ErrorCatalog
+  url: errors/saleo-problem-types.yml
+- type: Components
+  url: components/saleo-components.yml
+- type: Packages
+  url: packages/saleo-packages.yml
+- type: Plans
+  url: plans/saleo-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/saleo-rate-limits.yml
 x-enrichment:
-  date: '2026-07-21'
-  status: minimal
-  artifacts_added: 1
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 13
   pass: local-v1
