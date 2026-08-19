@@ -1,0 +1,94 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Saleo help centre, Okta Integration Network listing, saleo.io/platform/security/,
+  trust.saleo.io, plus unauthenticated HTTP probes of api.platform.saleo.io
+note: >-
+  Saleo publishes no OpenAPI, so none of these assertions are derived from a
+  specification. Standards marked conforms:true carry either a live protocol
+  observation or a published provider claim, named in `evidence`.
+standards:
+- id: scim2
+  name: SCIM 2.0 (RFC 7643 / RFC 7644)
+  conforms: true
+  evidence: >-
+    GET https://api.platform.saleo.io/scim/v2/Users returned HTTP 401 with a
+    conformant SCIM error envelope
+    {"schemas":["urn:ietf:params:scim:api:messages:2.0:Error"],"status":"401",
+    "detail":"UNAUTHORIZED"} on 2026-08-13. /scim/v2/ServiceProviderConfig,
+    /ResourceTypes, /Schemas, /Users and /Groups all exist and all return the same
+    envelope. Okta's Integration Network listing for Saleo declares SCIM with
+    Create, Update, Deactivate and Group Push.
+  observed: '2026-08-13'
+  caveat: >-
+    Feature conformance cannot be verified — ServiceProviderConfig is auth-gated,
+    so the supported patch/bulk/filter/sort/etag capabilities are not readable.
+- id: saml2
+  name: SAML 2.0
+  conforms: true
+  evidence: >-
+    Saleo publishes SAML-based SSO setup guides and Okta publishes a Saleo-specific
+    SAML 2.0 configuration document at
+    https://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-Saleo.html
+- id: soc2-type2
+  name: SOC 2 Type 2
+  conforms: true
+  evidence: >-
+    "Saleo meets rigorous SOC 2 Type 2 standards, ensuring your sensitive data is
+    protected" — https://saleo.io/platform/security/ ; a Vanta-hosted trust centre
+    is published at https://trust.saleo.io/
+  published_claim: true
+- id: iso27001
+  name: ISO/IEC 27001
+  conforms: true
+  evidence: named as a compliance standard on https://saleo.io/platform/security/
+  published_claim: true
+  caveat: named on the security page but no certificate or scope statement is public
+- id: gdpr
+  name: GDPR
+  conforms: true
+  evidence: >-
+    "Saleo never stores sensitive customer data — ensuring compliance with GDPR"
+    — https://saleo.io/platform/security/ ; privacy policy at
+    https://saleo.io/about-us/privacy-policy/
+  published_claim: true
+- id: rbac
+  name: Role-Based Access Control
+  conforms: true
+  evidence: >-
+    "Limit access to sensitive demo information with customizable Role-Based Access
+    Controls (RBAC)" — https://saleo.io/platform/security/
+- id: openapi
+  name: OpenAPI
+  conforms: false
+  evidence: >-
+    No OpenAPI/Swagger document found on any Saleo-controlled host. /openapi.json,
+    /openapi.yaml, /swagger.json, /v3/api-docs, /api-docs, /docs and /redoc were
+    probed on www.saleo.io, app.platform.saleo.io, api.platform.saleo.io,
+    tours.saleo.io, help.saleo.io and success.api.saleo.io on 2026-08-13. Every hit
+    was an HTML shell or a hard 404.
+- id: oauth2
+  conforms: false
+  evidence: no OAuth 2.0 authorization server, no /.well-known/oauth-authorization-server
+- id: oidc
+  conforms: false
+  evidence: no /.well-known/openid-configuration on any Saleo host
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are a bare {"message": "..."} envelope on the product API and the SCIM
+    error envelope on /scim/v2; neither is application/problem+json
+- id: asyncapi
+  conforms: false
+  evidence: no event, streaming or webhook surface documented
+- id: mcp
+  conforms: false
+  evidence: no MCP server found on any Saleo host or in any public MCP registry
+- id: a2a
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json probed on every Saleo
+    host — 404 on the JSON router, HTML SPA catch-all elsewhere. No agent card.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt is a soft-200 HTML page on www.saleo.io and 404 on the API host

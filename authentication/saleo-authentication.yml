@@ -1,0 +1,73 @@
+generated: '2026-08-13'
+method: searched
+source: https://help.saleo.io/articles/5029724323-how-to-configure-scim-within-saleo-s-okta-integration-network-app
+docs: https://help.saleo.io/collections/user-management-authentication
+note: >-
+  Saleo publishes no OpenAPI, so nothing here is derived from a specification.
+  Every scheme below is taken from Saleo's own knowledge-base articles, the Okta
+  Integration Network listing for Saleo, or an unauthenticated HTTP probe of the
+  live endpoint recorded in x-evidence.
+summary:
+  types: [http]
+  api_key_in: [header]
+  oauth2_flows: []
+  human_sso: [saml2]
+schemes:
+- name: scimBearerToken
+  type: http
+  scheme: bearer
+  description: >-
+    Long-lived API token minted in the Saleo Portal and pasted into the Okta
+    provisioning "API Token" field. Saleo's documentation states the tokens
+    "never expire, but can be revoked at any time" and can be deactivated if
+    compromised or on routine rotation. There is no published expiry, refresh, or
+    scope model — a token is org-wide for the SCIM surface.
+  applies_to: https://api.platform.saleo.io/scim/v2
+  rotation: manual revoke/deactivate, no expiry
+  scopes: none published
+  sources:
+  - https://help.saleo.io/articles/5029724323-how-to-configure-scim-within-saleo-s-okta-integration-network-app
+- name: saml2SSO
+  type: saml2
+  description: >-
+    SAML 2.0 single sign-on for human access to the Saleo Portal and the Saleo
+    Chrome extension. Customers supply a SAML Sign-On URL, SAML Issuer and SAML
+    Certificate from their identity provider. Okta ships a pre-built Saleo app;
+    Okta also publishes a Saleo-specific SAML configuration guide.
+  applies_to: https://app.platform.saleo.io/
+  sources:
+  - https://help.saleo.io/articles/2779294893-configuring-saml-based-sso-in-saleo
+  - https://help.saleo.io/articles/9198269906-single-sign-on-sso-okta-setup-guide
+  - https://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-Saleo.html
+  - https://www.okta.com/integrations/saleo/
+- name: productApiSessionAuth
+  type: unpublished
+  description: >-
+    The RPC-style product API at https://api.platform.saleo.io/v1/* that backs the
+    Saleo Portal, Chrome extension and tour viewer is customer-authenticated and
+    entirely undocumented. Its own authentication entry points are visible in the
+    first-party tour-viewer bundle (authenticate_by_email, authenticate_by_token,
+    authenticate_by_provider, authenticate_by_tourlink, authenticate_by_viewer_token,
+    authenticate_workato, create_scim_access_token) but Saleo publishes no reference
+    for any of them. Unauthenticated calls return HTTP 401 {"message":"UNAUTHENTICATED"}.
+  applies_to: https://api.platform.saleo.io/v1/
+  published: false
+oauth2: not offered
+openid_connect: not offered
+mtls: not offered
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://api.platform.saleo.io/scim/v2/Users
+  http_status: 401
+  body: '{"schemas":["urn:ietf:params:scim:api:messages:2.0:Error"],"status":"401","detail":"UNAUTHORIZED"}'
+- fetched: '2026-08-13'
+  url: https://api.platform.saleo.io/scim/v2/ServiceProviderConfig
+  http_status: 401
+  note: >-
+    RFC 7644 section 4 permits ServiceProviderConfig, ResourceTypes and Schemas to be
+    served anonymously; Saleo gates all three, so the SCIM feature set cannot be read
+    without a customer token.
+- fetched: '2026-08-13'
+  url: https://api.platform.saleo.io/v1/authenticate_by_email
+  http_status: 401
+  body: '{"message":"UNAUTHENTICATED"}'

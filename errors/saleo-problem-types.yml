@@ -1,0 +1,70 @@
+generated: '2026-08-13'
+method: probed
+source: unauthenticated HTTP probes of https://api.platform.saleo.io
+format: vendor
+note: >-
+  Saleo publishes no OpenAPI and no error reference, so nothing here is derived
+  from a specification or from documentation. Every entry is an error envelope
+  observed on a live unauthenticated request on 2026-08-13. Two distinct envelopes
+  coexist on the same host: the SCIM surface returns a conformant RFC 7644 error
+  object, while the product API returns a bare {"message": "..."} object. Neither
+  is RFC 9457 application/problem+json, and neither carries a machine-stable error
+  code, so an agent has nothing but the HTTP status and an English string to
+  branch on.
+envelopes:
+- name: scim-error
+  applies_to: https://api.platform.saleo.io/scim/v2/*
+  content_type: application/json
+  shape: '{"schemas":["urn:ietf:params:scim:api:messages:2.0:Error"],"status":"<code>","detail":"<text>"}'
+  standard: RFC 7644 section 3.12
+  machine_stable_code: false
+- name: message-error
+  applies_to: https://api.platform.saleo.io/v1/* and the host root
+  content_type: application/json
+  shape: '{"message":"<text>"}'
+  standard: none
+  machine_stable_code: false
+problems:
+- status: 401
+  envelope: scim-error
+  title: UNAUTHORIZED
+  detail: UNAUTHORIZED
+  observed_on:
+  - https://api.platform.saleo.io/scim/v2/Users
+  - https://api.platform.saleo.io/scim/v2/Groups
+  - https://api.platform.saleo.io/scim/v2/ServiceProviderConfig
+  - https://api.platform.saleo.io/scim/v2/ResourceTypes
+  - https://api.platform.saleo.io/scim/v2/Schemas
+  remediation: >-
+    Present the SCIM bearer API token minted from the Saleo Portal in the
+    Authorization header. Note that Saleo gates ServiceProviderConfig, ResourceTypes
+    and Schemas, which RFC 7644 section 4 allows to be served anonymously.
+- status: 401
+  envelope: message-error
+  title: UNAUTHENTICATED
+  detail: UNAUTHENTICATED
+  observed_on:
+  - https://api.platform.saleo.io/v1/authenticate_by_email
+  - https://api.platform.saleo.io/v1/get_demos
+  - https://api.platform.saleo.io/v1/create_demo
+  remediation: >-
+    Not publicly actionable — the product API is undocumented and its
+    authentication flows are not published.
+- status: 404
+  envelope: message-error
+  title: Not Found
+  detail: Not Found
+  observed_on:
+  - https://api.platform.saleo.io/
+  - https://api.platform.saleo.io/openapi.json
+  - https://api.platform.saleo.io/.well-known/openid-configuration
+  remediation: The path does not exist on the API gateway.
+gaps:
+- no RFC 9457 application/problem+json
+- no machine-stable error code or error type URI
+- no published error reference
+- no error taxonomy documented for the product API
+x-evidence:
+  fetched: '2026-08-13'
+  method: unauthenticated GET/POST
+  host: api.platform.saleo.io

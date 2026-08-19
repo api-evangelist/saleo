@@ -1,0 +1,31 @@
+# Saleo
+
+> Saleo is the AI-native demo experience platform that helps SaaS sales, presales, and marketing teams run personalized live demos, create self-serve product tours, and deliver autonomous demos 24/7 — all inside their native product.
+
+## Platform
+
+- [Saleo Live™](https://saleo.io/platform/saleo-live/): Run live demos directly in your native product using an AI modeling engine that injects rich, realistic demo data — no manual data entry, no demo environment maintenance. Supports full takeover, partial takeover, and hybrid data modes. Includes Demo Sync to cascade updates across thousands of demos from a single source.
+- [Saleo Capture™](https://saleo.io/platform/saleo-capture/): Capture screenshots of your real product to create interactive guided tours and self-serve sandbox experiences. Build with no code using a Chrome extension, add tooltips and dialogs, personalize with find-and-replace, and track completions, drop-offs, and engagement. Ideal for website embeds, sales leave-behinds, and event follow-ups.
+- [AI Demo Agent](https://saleo.io/ai-demo-agent/): A fully autonomous, multi-lingual demo agent that delivers personalized product demos 24/7 without a human rep. Trained on your product and messaging, it handles real-time discovery, answers complex buyer questions, navigates use cases, and adapts on the fly — powered by Live™ demo data. Captures transcripts, objections, and engagement analytics automatically.
+- [Data Creation Agent](https://saleo.io/data-creation-agent/): An AI assistant integrated directly into Live™ that instantly generates realistic, context-aware demo data from natural language prompts — no spreadsheets, no manual entry, no staging environments. Produces industry-specific, story-driven data tailored to each prospect.
+- [Partner Portal](https://saleo.io/partner-portal/): Enables reseller and integration partners to deliver your product demos your way — using Live™ data and Capture™ tours — while you maintain full control over what's shared, who has access, and how demos are presented. Includes admin-level sharing controls and flexible seat management.
+
+## Solutions
+
+- [Presales](https://saleo.io/solutions/presales/): How Saleo helps presales and sales engineering teams deliver tailored demos faster and more efficiently.
+- [Sales](https://saleo.io/solutions/sales/): How Saleo empowers account executives to run compelling, personalized demos without relying on SE support.
+- [Marketing](https://saleo.io/solutions/marketing/): How Saleo enables marketing teams to create interactive product experiences for campaigns, events, and website demos.
+
+## Pricing
+
+- [Pricing](https://saleo.io/pricing/): Saleo's pricing plans and packaging options.
+
+## Resources
+
+- [Demo AI Effectively – Sales Guide](https://saleo.io/demo-ai-effectively-sales-guide/): A guide for sales teams on how to effectively demonstrate AI-powered product features to prospects.
+- [Demo AI Effectively – eBook Preview](https://saleo.io/demo-ai-effectively-a-sales-guide-to-showcasing-ai-product-features-ebook-preview/): Preview of the full eBook covering best practices for showcasing AI product features in a sales context.
+- [How Salesforce Scaled Demo Personalization with Saleo](https://saleo.io/how-salesforce-scaled-demo-personalization-with-saleo/): Customer story detailing how Salesforce used Saleo to scale personalized demo delivery across their sales organization.
+
+## Company
+
+- [About Us](https://saleo.io/about-us/): Saleo's mission, team, and company background.

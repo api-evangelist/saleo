@@ -42,6 +42,12 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Saleo is a company surfaced as a portfolio company of emergence-capital and added to the API Evangelist network as a stub for enrichment. Sector: sales-tech. This profile is a lead awaiting the enrichment pipeline.
+Saleo is an AI-native demo experience platform for go-to-market teams — Live (personalized live demos inside your own product), AI Demo Agent, Data Creation Agent, Capture (interactive tours and embeddable sandboxes) and a Partner Portal. Sector: sales-tech. Backed by Emergence Capital.
+
+**API surface (enriched 2026-08-13).** Saleo has one standards-based, externally documented API: a **SCIM 2.0 user and group provisioning endpoint** at `https://api.platform.saleo.io/scim/v2`, documented for customers through the Saleo application in the Okta Integration Network (Create, Update, Deactivate, Group Push). It authenticates with a long-lived bearer token minted in the Saleo Portal, and every resource — including `ServiceProviderConfig`, `ResourceTypes` and `Schemas`, which RFC 7644 permits to be served anonymously — returns HTTP 401 with a conformant SCIM error envelope. SAML 2.0 SSO is also supported.
+
+There is **no public developer portal, no API reference and no OpenAPI**: `/openapi.json`, `/openapi.yaml`, `/swagger.json`, `/v3/api-docs`, `/api-docs`, `/docs` and `/redoc` were probed on every Saleo-controlled host and all missed. The product API that backs the Portal, the Chrome extension and the tour viewer (`https://api.platform.saleo.io/v1/*`) is undocumented and entirely customer-authenticated. Release notes exist but the Featurebase organisation is private.
+
+Publicly readable and captured here: a provider-published `llms.txt`, a public incident.io status page with ten components, a Vanta trust centre, and a security page naming SOC 2 Type 2, ISO 27001 and GDPR.
 
 Backed by: emergence-capital — https://www.saleo.io

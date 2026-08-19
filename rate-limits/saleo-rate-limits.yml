@@ -1,0 +1,39 @@
+generated: '2026-08-13'
+method: probed
+source: https://api.platform.saleo.io/scim/v2/Users
+limit_count: 0
+limits: []
+headers: []
+exhaustion_status: null
+retry_after: unknown
+note: >-
+  No rate limits are documented. Saleo has no developer portal or API reference,
+  and the SCIM configuration articles in the help centre say nothing about quotas,
+  throttling or backoff. Unauthenticated responses from
+  https://api.platform.saleo.io carry no X-RateLimit-*, RateLimit-* or Retry-After
+  header — the 401 response headers are limited to the CloudFront/API-Gateway set
+  plus HSTS, X-Frame-Options, X-Content-Type-Options, X-XSS-Protection and
+  Referrer-Policy. Whether limits are enforced behind authentication cannot be
+  observed without a customer token, so this records limit_count 0 as an honest
+  absence of a published or observable runtime signal, not an assertion that the
+  API is unlimited.
+observed_response_headers:
+- strict-transport-security
+- x-frame-options
+- x-content-type-options
+- x-xss-protection
+- referrer-policy
+- apigw-requestid
+- x-cache
+- via
+- x-amz-cf-pop
+- x-amz-cf-id
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://api.platform.saleo.io/scim/v2/Users
+  http_status: 401
+  rate_limit_headers_present: false
+- fetched: '2026-08-13'
+  url: https://api.platform.saleo.io/v1/get_demos
+  http_status: 401
+  rate_limit_headers_present: false

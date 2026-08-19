@@ -1,0 +1,74 @@
+generated: '2026-08-13'
+method: probed
+source: >-
+  unauthenticated probes of https://api.platform.saleo.io plus Saleo's own
+  help-centre SCIM/SSO articles
+note: >-
+  Saleo publishes no API reference, so these conventions were established by
+  observing the live surface and reading the two customer-facing configuration
+  articles. Where a convention could not be established without a customer token
+  it is recorded as `unknown` rather than guessed.
+authentication:
+  style: bearer token (SCIM) / unpublished session auth (product API)
+  header: Authorization
+  detail: see authentication/saleo-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    No idempotency key, no request-deduplication contract and no retry-safety
+    guidance is documented for either surface. SCIM's own semantics give PUT/PATCH
+    on a known resource id natural idempotency, but that is the standard's property
+    and not a Saleo contract, so no `Idempotency` pointer is emitted.
+pagination:
+  style: scim-startindex-count
+  params: [startIndex, count]
+  response_fields: [totalResults, itemsPerPage, startIndex, Resources]
+  note: >-
+    Inherited from RFC 7644 section 3.4.2.4 for the /scim/v2 surface. Saleo does not
+    document it, and the ServiceProviderConfig that would confirm filter/sort support
+    is auth-gated. The /v1/* product API has no observable pagination contract.
+  verified: false
+filtering:
+  style: scim-filter
+  note: RFC 7644 filter syntax presumed for /scim/v2; not confirmed (ServiceProviderConfig is gated)
+  verified: false
+field_expansion:
+  supported: unknown
+metadata:
+  supported: unknown
+request_tracing:
+  header: apigw-requestid
+  note: >-
+    Responses carry an AWS API Gateway request id (apigw-requestid) plus CloudFront
+    x-amz-cf-id. Neither is documented by Saleo as a support-correlation identifier,
+    but both are returned on every response including 401s.
+  vendor_supplied: true
+versioning:
+  style: uri-path
+  detail: /scim/v2 on the SCIM surface, /v1 on the product API
+  policy_published: false
+  see: lifecycle/saleo-lifecycle.yml
+error_envelope:
+  scim: RFC 7644 error object
+  product_api: '{"message":"<text>"}'
+  problem_json: false
+  see: errors/saleo-problem-types.yml
+rate_limit_signalling:
+  headers: []
+  documented: false
+  see: rate-limits/saleo-rate-limits.yml
+transport:
+  http_version: HTTP/2
+  tls: TLSv1.3
+  hsts: true
+  cdn: Amazon CloudFront in front of AWS API Gateway
+api_style:
+  scim_surface: REST (RFC 7644 resource model)
+  product_api: >-
+    RPC over POST — 255 distinct /v1/<verb_noun> paths were enumerated from Saleo's
+    own public tour-viewer JavaScript bundle (get_*, upsert_*, delete_*, update_*,
+    create_* dominate). This is an internal contract: it is undocumented, entirely
+    auth-gated, and is recorded here as an observation about the shape of the
+    surface only. No specification has been synthesised from it, because Saleo
+    publishes no request or response schema for any of those operations.

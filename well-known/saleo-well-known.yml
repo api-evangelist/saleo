@@ -1,0 +1,57 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* on every Saleo-controlled host
+note: >-
+  NO HIT. Every /.well-known/* path probed on a Saleo host either 404s or is
+  answered by a single-page-app / WordPress catch-all that returns HTTP 200 with
+  an HTML document. A 200 carrying HTML is NOT a well-known document, so no
+  `WellKnown` and no `SecurityTxt` pointer is emitted in apis.yml for this
+  provider. The one Saleo host with a real JSON router — api.platform.saleo.io —
+  returns a clean {"message":"Not Found"} on every well-known path, which is the
+  honest negative.
+hosts:
+- host: api.platform.saleo.io
+  kind: api
+  router: json
+  documents:
+  - {path: /.well-known/security.txt, status: 404, document: false}
+  - {path: /.well-known/openid-configuration, status: 404, document: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, document: false}
+  - {path: /.well-known/oauth-protected-resource, status: 404, document: false}
+  - {path: /.well-known/api-catalog, status: 404, document: false}
+  - {path: /.well-known/agent-card.json, status: 404, document: false}
+  - {path: /.well-known/agent.json, status: 404, document: false}
+- host: www.saleo.io
+  kind: website
+  router: wordpress-catch-all
+  documents:
+  - {path: /.well-known/security.txt, status: 200, document: false, body: text/html soft-404}
+  - {path: /.well-known/openid-configuration, status: 200, document: false, body: text/html soft-404}
+  - {path: /.well-known/oauth-authorization-server, status: 200, document: false, body: text/html soft-404}
+  - {path: /.well-known/api-catalog, status: 200, document: false, body: text/html soft-404}
+  - {path: /.well-known/ai-plugin.json, status: 200, document: false, body: text/html soft-404}
+  - {path: /.well-known/agent-card.json, status: 200, document: false, body: text/html soft-404}
+  - {path: /.well-known/agent.json, status: 200, document: false, body: text/html soft-404}
+- host: app.platform.saleo.io
+  kind: portal
+  router: spa-catch-all
+  documents:
+  - {path: /.well-known/security.txt, status: 200, document: false, body: text/html SPA shell}
+  - {path: /.well-known/openid-configuration, status: 200, document: false, body: text/html SPA shell}
+  - {path: /.well-known/oauth-authorization-server, status: 200, document: false, body: text/html SPA shell}
+  - {path: /.well-known/oauth-protected-resource, status: 200, document: false, body: text/html SPA shell}
+  - {path: /.well-known/api-catalog, status: 200, document: false, body: text/html SPA shell}
+  - {path: /.well-known/agent-card.json, status: 200, document: false, body: text/html SPA shell}
+  - {path: /.well-known/agent.json, status: 200, document: false, body: text/html SPA shell}
+- host: tours.saleo.io
+  kind: tour-viewer
+  router: spa-catch-all
+  documents:
+  - {path: /.well-known/agent-card.json, status: 200, document: false, body: text/html SPA shell}
+  - {path: /.well-known/agent.json, status: 200, document: false, body: text/html SPA shell}
+  - {path: /.well-known/security.txt, status: 200, document: false, body: text/html SPA shell}
+summary:
+  paths_probed: 33
+  real_documents: 0
+  soft_200_html: 22
+  hard_404: 11

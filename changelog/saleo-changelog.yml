@@ -1,0 +1,38 @@
+generated: '2026-08-13'
+method: probed
+source: https://features.saleo.io/changelog
+access: gated
+public: false
+platform: Featurebase
+urls:
+  vanity: https://release-notes.saleo.io/
+  branded: https://features.saleo.io/changelog
+  canonical: https://saleo.featurebase.app/changelog
+scheme: null
+current_version: null
+entries: []
+entry_count: 0
+note: >-
+  Saleo operates a release-notes surface, but it is customer-gated and therefore
+  not publicly readable. https://release-notes.saleo.io/ redirects to
+  https://features.saleo.io/changelog, which serves a Featurebase page whose own
+  bootstrap payload declares the organisation "private": true and "hideRoadmap":
+  true. The Featurebase changelog API returns HTTP 200 with
+  {"message":"Organization is private. Please authenticate.","success":false} at
+  both /api/v1/changelog and the vendor's do.featurebase.app endpoint. No entries,
+  dates or versions could be read. Because the artefact records an ABSENCE of a
+  public changelog rather than a captured one, NO `ChangeLog` pointer is wired
+  into apis.yml — the provider can close this in one setting.
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://release-notes.saleo.io/
+  http_status: 200
+  redirects_to: https://features.saleo.io/changelog
+- fetched: '2026-08-13'
+  url: https://saleo.featurebase.app/api/v1/changelog?limit=10
+  http_status: 200
+  body: '{"message":"Organization is private. Please authenticate.","success":false}'
+- fetched: '2026-08-13'
+  url: https://features.saleo.io/api/openapi.json
+  http_status: 401
+  body: '{"message":"Organization is private. Please authenticate.","success":false}'

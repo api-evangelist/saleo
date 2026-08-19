@@ -1,0 +1,25 @@
+generated: '2026-08-13'
+method: searched
+source: npm, PyPI, RubyGems, crates.io, GitHub org lookups + Saleo docs
+package_count: 0
+official_sdk_count: 0
+packages: []
+note: >-
+  Saleo ships no client libraries. Checked, nothing to record — this is a verified
+  zero, not an unchecked field. No `SDKs` pointer is emitted in apis.yml because
+  there is no SDK to point at. The only client-side artefacts Saleo distributes are
+  an unlisted Chrome Web Store extension and an iframe-embedded tour viewer, both
+  recorded in components/saleo-components.yml; neither has a package registry
+  entry, so neither carries a readable version or publish date.
+registries_checked:
+- {registry: npm, query: 'https://registry.npmjs.org/-/v1/search?text=saleo', result: 0 matches, version: null, published: null}
+- {registry: pypi, url: 'https://pypi.org/pypi/saleo/json', status: 404, version: null, published: null}
+- {registry: rubygems, url: 'https://rubygems.org/api/v1/gems/saleo.json', status: 404, version: null, published: null}
+- {registry: crates.io, url: 'https://crates.io/api/v1/crates/saleo', status: 403, version: null, published: null, note: 'crates.io rejects the unauthenticated agent; no Saleo crate is expected or referenced anywhere in Saleo docs'}
+- {registry: github, url: 'https://api.github.com/orgs/saleo', status: 404, version: null, published: null}
+- {registry: github, url: 'https://api.github.com/orgs/saleo-io', status: 404, version: null, published: null}
+- {registry: github, url: 'https://api.github.com/orgs/getsaleo', status: 404, version: null, published: null}
+- {registry: chrome-web-store, query: 'https://chromewebstore.google.com/search/saleo', result: no public listing, version: null, published: null, note: 'Saleo FAQ says the extension download is available to customers only'}
+x-evidence:
+  fetched: '2026-08-13'
+  conclusion: no first-party package exists on any public registry

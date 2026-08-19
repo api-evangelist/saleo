@@ -1,0 +1,25 @@
+generated: '2026-08-13'
+method: searched
+source: https://saleo.io/pricing/
+currency: null
+plan_count: 0
+plans: []
+pricing_model: contact-sales
+note: >-
+  Saleo publishes a pricing PAGE but no prices. The page presents four modular
+  products to "mix and match" — Live, AI Demo Agent, Capture and Partner Portal —
+  and routes every pricing question to a "Request Pricing" form at
+  https://saleo.io/request-a-demo/. No tier names, no list prices, no seat counts,
+  no included quota, no overage terms and no usage limits are stated anywhere on
+  saleo.io. plan_count is an honest 0: the provider is enterprise contact-sales
+  only, not a provider whose plans we failed to find.
+products_listed:
+- {name: Live, description: Live demos with customised data, price: not published}
+- {name: AI Demo Agent, description: Autonomous demos for discovery, price: not published}
+- {name: Capture, description: Interactive product tours, price: not published}
+- {name: Partner Portal, description: Channel partner enablement, price: not published}
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://saleo.io/pricing/
+  http_status: 200
+  observed: '"Request Pricing" CTA; no numeric price on the page'

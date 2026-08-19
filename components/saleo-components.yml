@@ -1,0 +1,63 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://saleo.io/platform/saleo-capture/ , https://saleo.io/example-demo-embed/ ,
+  https://tours.saleo.io/deployconfig.js
+note: >-
+  Saleo ships no JavaScript component library and no npm-distributed elements. Its
+  client-side surface is a browser extension plus an iframe-embedded tour viewer.
+  Both are recorded here because they are the only ways a Saleo customer puts Saleo
+  into their own page or browser; neither has a versioned public distribution.
+families:
+- name: Tour Viewer embed
+  kind: iframe
+  loader: null
+  url_pattern: https://tours.saleo.io/{tourId}
+  example: >-
+    <iframe style="width: 100vw; height: 100vh;" allowfullscreen
+    src="https://tours.saleo.io/{tourId}"></iframe>
+  evidence: >-
+    An iframe of this exact shape is embedded on Saleo's own
+    https://saleo.io/example-demo-embed/ page (that page points at the staging
+    host tour-viewer.staging-saleo.io; the production viewer is tours.saleo.io).
+  backend: https://api.platform.saleo.io
+  attachments: https://attachments.platform.saleo.io
+  versioned: false
+  note: >-
+    The viewer is an unpinned SPA served from the tours host. A consumer embedding
+    it cannot pin a version — whatever Saleo has deployed is what renders.
+- name: Saleo Chrome extension
+  kind: browser-extension
+  browser: Google Chrome
+  distribution: Chrome Web Store
+  public_listing: false
+  extension_id: null
+  evidence: >-
+    "Saleo operates entirely through a secure Google Chrome extension"
+    (https://saleo.io/platform/security/). Saleo's FAQ states the download is
+    available on the Chrome Web Store once you become a customer. A Chrome Web
+    Store search for "saleo" returned no public listing on 2026-08-13, so the
+    extension appears to be unlisted/private and no extension id or version could
+    be recorded.
+  versioned: unknown
+- name: Saleo Capture sandbox
+  kind: hosted-embeddable-surface
+  description: >-
+    Interactive guided tours and self-serve exploratory sandbox experiences built
+    from captured screenshots of a real product, embedded on websites and in
+    partner surfaces such as Seismic DSRs and LiveSend.
+  url_pattern: https://tours.saleo.io/{tourId}
+  authoring: Chrome extension, no code
+  evidence: https://saleo.io/platform/saleo-capture/
+loader_libraries: []
+npm_packages: []
+component_count: 3
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://tours.saleo.io/deployconfig.js
+  http_status: 200
+  observed: 'backendUrl https://api.platform.saleo.io, attachmentsUrl https://attachments.platform.saleo.io'
+- fetched: '2026-08-13'
+  url: https://saleo.io/example-demo-embed/
+  http_status: 200
+  observed: iframe embed of the Saleo tour viewer

@@ -1,0 +1,59 @@
+generated: '2026-08-13'
+method: searched
+source: https://status.saleo.io/
+versioning:
+  scheme: uri-path
+  current: v2
+  applies_to: https://api.platform.saleo.io/scim/v2
+  docs: null
+  note: >-
+    The SCIM surface is versioned by the SCIM standard itself (/scim/v2), not by a
+    Saleo versioning policy. The undocumented product API is pinned at /v1/*.
+    Saleo publishes no API versioning policy of its own.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: >-
+    No deprecation or sunset policy is published anywhere on saleo.io,
+    help.saleo.io or the release-notes surface. RFC 8594 Sunset/Deprecation header
+    support could not be tested — every endpoint 401s before returning a body.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No SLA is published. Rolling uptime percentages are shown per component on the
+    public status page but no commitment is stated.
+status_page: https://status.saleo.io/
+status_page_platform: incident.io
+status_page_components:
+- {name: Chrome Extension, uptime_90d: '100%'}
+- {name: Saleo AI, uptime_90d: '100%'}
+- {name: Saleo Live, uptime_90d: '99.96%'}
+- {name: Saleo Capture, uptime_90d: '99.94%'}
+- {name: Analytics, uptime_90d: '100%'}
+- {name: Saleo Portal, uptime_90d: '100%'}
+- {name: Partner Portal, uptime_90d: '100%'}
+- {name: Integrations, uptime_90d: '100%'}
+- {name: Website, uptime_90d: '100%'}
+- {name: Single Sign-On, uptime_90d: '100%'}
+release_notes:
+  url: https://features.saleo.io/changelog
+  alias: https://release-notes.saleo.io/
+  canonical: https://saleo.featurebase.app/changelog
+  platform: Featurebase
+  public: false
+  note: >-
+    Release notes exist but the Featurebase organisation is configured private
+    ("private": true in the page's own bootstrap payload) and the changelog API
+    returns {"message":"Organization is private. Please authenticate."}. Entries
+    are not readable without a Saleo account, so no ChangeLog pointer is emitted.
+deprecated_operations: []
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://status.saleo.io/
+  http_status: 200
+  observed: 10 components with rolling uptime, "We're fully operational"
+- fetched: '2026-08-13'
+  url: https://saleo.featurebase.app/api/v1/changelog
+  http_status: 200
+  body: '{"message":"Organization is private. Please authenticate.","success":false}'
