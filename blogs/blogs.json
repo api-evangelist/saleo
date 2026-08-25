@@ -1,0 +1,14 @@
+{
+  "repo": "saleo",
+  "feeds": [
+    {
+      "source": "https://help.saleo.io/",
+      "feed_url": "https://help.saleo.io/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-22T20:20:02Z"
+}
